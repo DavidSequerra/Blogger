@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import ReplyBtn from './ReplyBtn';
 import LikeBtn from './LikeBtn';
 import UserCard from '../userCard/UserCard';
 import DeleteBtn from './DeleteBtn';
+import HostRenderCtx from '../../context/hostContext';
 
 import styles from './RepliesSection.module.css';
 
@@ -12,10 +13,11 @@ function RepliesSection({ postId, userId, replyCount }) {
     const [replies, setReplies] = useState([]);
     const [secondRepliesVisibility, setSecondRepliesVisibility] = useState({});
     const [secondRepliesData, setSecondRepliesData] = useState({});
+    const urlRender = useContext(HostRenderCtx); 
 
     const fetchReplies = async () => {
         try {
-            const response = await axios.get(`http://localhost:3001/replies/${postId}`);
+            const response = await axios.get(`${urlRender }/replies/${postId}`);
             setReplies(response.data);
         } catch (error) {
             console.error(error);
@@ -29,7 +31,7 @@ function RepliesSection({ postId, userId, replyCount }) {
 
     const fetchSecondReplies = async (replyId) => {
         try {
-            const response = await axios.get(`http://localhost:3001/replies/replyId/${replyId}`);
+            const response = await axios.get(`${urlRender }/replies/replyId/${replyId}`);
             console.log(response.data)
             setSecondRepliesData(prevData => ({
                 ...prevData,

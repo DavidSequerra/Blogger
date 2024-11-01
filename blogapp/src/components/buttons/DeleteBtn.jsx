@@ -9,10 +9,15 @@ import styles from './DeleteBtn.module.css';
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 import CurrentUserCtx from '../../context/currentUser';
+import HostRenderCtx from '../../context/hostContext';
+
+    
+
 
 
 function DeleteBtn({ userId, type, typeId, refreshParent }) {
     const localId = localStorage.getItem("USER_ID");
+const urlRender = useContext(HostRenderCtx); 
     const { setCurrentUser } = useContext(CurrentUserCtx);
     const navigate = useNavigate();
     const [showOverlay, setShowOverlay] = useState(false);
@@ -32,16 +37,16 @@ function DeleteBtn({ userId, type, typeId, refreshParent }) {
         // eslint-disable-next-line default-case
         switch (type) {
             case 'Reply':
-                url = `http://localhost:3001/replies/${typeId}?userId=${userId}`
+                url = `${urlRender }/replies/${typeId}?userId=${userId}`
                 break;
             case 'Comment':
-                url = `http://localhost:3001/replies/${typeId}?userId=${userId}`
+                url = `${urlRender }/replies/${typeId}?userId=${userId}`
                 break;
             case 'Post':
-                url = `http://localhost:3001/posts/${typeId}?userId=${userId}`
+                url = `${urlRender }/posts/${typeId}?userId=${userId}`
                 break;
             case 'Blog':
-                url = `http://localhost:3001/blogs/${typeId}?userId=${userId}`
+                url = `${urlRender }/blogs/${typeId}?userId=${userId}`
                 break;
 
         }

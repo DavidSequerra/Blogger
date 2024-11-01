@@ -4,12 +4,13 @@ import Form from "react-bootstrap/Form";
 import { useNavigate } from 'react-router-dom';
 
 import CurrentUserCtx from '../../context/currentUser';
-
+import HostRenderCtx from '../../context/hostContext';
 import styles from './LogIn.module.css'
 
 function LogInA() {
     const navigate = useNavigate();
     const { setCurrentUser } = useContext(CurrentUserCtx);
+    const urlRender = useContext(HostRenderCtx); 
     const [formEmail, setFormEmail] = useState('');
     const [formPassword, setFormPassword] = useState('');
 
@@ -19,7 +20,7 @@ function LogInA() {
             password: formPassword
         };
         try {
-            const response = await axios.post('http://localhost:3001/users/login', formData);
+            const response = await axios.post(`${ urlRender }/users/login`, formData);
             if (response.status === 200) {
                 const currentUser = response.data[0];
                 currentUser.change = 0;

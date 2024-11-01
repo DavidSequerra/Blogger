@@ -4,12 +4,14 @@ import Form from "react-bootstrap/Form";
 import axios from 'axios';
 
 import CurrentUserCtx from '../../context/currentUser';
+import HostRenderCtx from '../../context/hostContext';
 import { useNavigate } from 'react-router-dom';
 
 import styles from './CreateBlogBtn.module.css'
 
 function CreateBlog() {
     const { setCurrentUser } = useContext(CurrentUserCtx);
+    const urlRender = useContext(HostRenderCtx); 
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
     const [blogTitle, setBlogTitle] = useState('');
@@ -22,7 +24,7 @@ function CreateBlog() {
             description: blogDescription
         }
         try {
-            const response = await axios.post(`http://localhost:3001/blogs/${userId}`, formData);
+            const response = await axios.post(`${urlRender}/blogs/${userId}`, formData);
             setShowModal(false);
             setBlogTitle('');
             setBlogDescription('');

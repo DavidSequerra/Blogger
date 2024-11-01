@@ -1,13 +1,16 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useContext } from 'react';
 import axios from 'axios';
 import Form from "react-bootstrap/Form";
 import Overlay from "react-bootstrap/Overlay";
 import Popover from 'react-bootstrap/Popover';
+import HostRenderCtx from '../../context/hostContext';
+
 
 import styles from './ReplyBtn.module.css';
 
 function ReplyBtn({ postId, parentReplyId, refreshParent }) {
     const [showOverlay, setShowOverlay] = useState(false);
+    const urlRender = useContext(HostRenderCtx); 
     const [target, setTarget] = useState(null);
     const [replyContent, setReplyContent] = useState('');
     const ref = useRef(null);
@@ -30,7 +33,7 @@ function ReplyBtn({ postId, parentReplyId, refreshParent }) {
             };
             if (postId.length > 0) {
                 // eslint-disable-next-line no-unused-vars
-                const response = await axios.post(`http://localhost:3001/replies/newReply`, newData);
+                const response = await axios.post(`${urlRender }/replies/newReply`, newData);
                 setReplyContent('');
                 setShowOverlay(!showOverlay);
                 refreshParent();

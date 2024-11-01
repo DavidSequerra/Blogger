@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import HostRenderCtx from '../../context/hostContext';
 
-import styles from './LikeBtn.module.css'
+import styles from './LikeBtn.module.css';
 
 function LikeBtn({ userId, itemId, itemType }) {
     const [likes, setLikes] = useState(0);
     const [userHasLiked, setUserHasLiked] = useState(false);
-
+    const urlRender = useContext(HostRenderCtx);
     useEffect(() => {
         fetchLikes();
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -14,7 +15,7 @@ function LikeBtn({ userId, itemId, itemType }) {
 
     const fetchLikes = async () => {
         try {
-            const response = await axios.get(`http://localhost:3001/likes/${itemType}/${itemId}`, {
+            const response = await axios.get(`${urlRender}/likes/${itemType}/${itemId}`, {
                 params: { userId }
             });
             setLikes(response.data.allLikes.length);
@@ -30,7 +31,7 @@ function LikeBtn({ userId, itemId, itemType }) {
 
     const postLike = async () => {
         try {
-            const response = await axios.post(`http://localhost:3001/likes/postLike`, {
+            const response = await axios.post(`${urlRender}/likes/postLike`, {
                 userId,
                 itemId,
                 itemType

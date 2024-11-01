@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
+import HostRenderCtx from '../../context/hostContext';
 
 export default function InfiniteSearch(query, pageNumber) {
+   const urlRender = useContext(HostRenderCtx); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [items, setItems] = useState([]);
   const [hasMore, setHasMore] = useState(false);
+ 
 
   useEffect(() => {
     setItems([]);
@@ -17,7 +20,7 @@ export default function InfiniteSearch(query, pageNumber) {
     let cancel;
     axios({
       method: "POST",
-      url: `http://localhost:3001/blogs/infinite`,
+      url: `${ urlRender }/blogs/infinite`,
       data: { query: query, pageNumber: pageNumber },
       cancelToken: new axios.CancelToken((c) => (cancel = c)),
     })

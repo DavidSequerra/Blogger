@@ -9,12 +9,13 @@ import LikeBtn from '../components/buttons/LikeBtn';
 import UserCard from '../components/userCard/UserCard';
 import DeleteBtn from '../components/buttons/DeleteBtn';
 import CurrentUserCtx from '../context/currentUser';
-
+import HostRenderCtx from '../context/hostContext';
 import styles from './FeedPage.module.css'
 
 function FeedPage() {
     const userId = localStorage.getItem("USER_ID");
     const { currentUser } = useContext(CurrentUserCtx);
+    const urlRender = useContext(HostRenderCtx);
     const navigate = useNavigate();
     const { blogId } = useParams();
     const [posts, setPosts] = useState([]);
@@ -24,15 +25,15 @@ function FeedPage() {
     const fetchPosts = async () => {
         try {
             if (blogId) {
-                const response = await axios.get(`http://localhost:3001/posts/${blogId}`);
+                const response = await axios.get(`${urlRender }/posts/${blogId}`);
                 if (response.data.length > 0) {
                     setPosts(response.data);
                 } else {
-                    const response = await axios.get(`http://localhost:3001/blogs/${blogId}`);
+                    const response = await axios.get(`${urlRender }/blogs/${blogId}`);
                     setTitle(response.data[0].title);
                 }
             } else {
-                const response = await axios.get(`http://localhost:3001/posts/usersBlogs`);
+                const response = await axios.get(`${urlRender }/posts/usersBlogs`);
                 setAllPosts(response.data);
                 setPosts([]);
             }

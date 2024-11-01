@@ -3,11 +3,14 @@ import Modal from 'react-bootstrap/Modal';
 import Form from "react-bootstrap/Form";
 import axios from 'axios';
 import CurrentUserCtx from '../../context/currentUser';
+import HostRenderCtx from '../../context/hostContext';
+
 
 import styles from './PostBtn.module.css'
 
 function PostBtn({ blogId }) {
     const { setCurrentUser } = useContext(CurrentUserCtx);
+    const urlRender = useContext(HostRenderCtx); 
     const [showModal, setShowModal] = useState(false);
     const [postContent, setPostContent] = useState('');
     const userId = localStorage.getItem("USER_ID");
@@ -22,7 +25,7 @@ function PostBtn({ blogId }) {
         }
         try {
             // eslint-disable-next-line no-unused-vars
-            const response = await axios.post(`http://localhost:3001/posts/newPost`, postData);
+            const response = await axios.post(`${urlRender }/posts/newPost`, postData);
             setShowModal(false);
             setPostContent('');
             setCurrentUser(prev => ({

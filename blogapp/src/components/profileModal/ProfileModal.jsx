@@ -3,10 +3,13 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import CurrentUserCtx from '../../context/currentUser';
+
+import HostRenderCtx from '../../context/hostContext';
 import styles from './ProfileModal.module.css'
 
 function ProfileModal() {
     const userId = localStorage.getItem("USER_ID");
+    const urlRender = useContext(HostRenderCtx);
     const { currentUser, setCurrentUser } = useContext(CurrentUserCtx);
     const [clicked, setClicked] = useState(false);
     const [formFirstName, setFormFirstName] = useState('');
@@ -20,7 +23,7 @@ function ProfileModal() {
         const fetchData = async () => {
             if (!currentUser) {
                 try {
-                    const response = await axios.get(`http://localhost:3001/users/${userId}`);
+                    const response = await axios.get(`${urlRender }/users/${userId}`);
                     const data = response.data[0];
                     setFormFirstName(data.first_name || '');
                     setFormLastName(data.last_name || '');
@@ -55,7 +58,7 @@ function ProfileModal() {
             password: formPassword
         };
         try {
-            const response = await axios.put(`http://localhost:3001/users/update/${userId}`, formData);
+            const response = await axios.put(`${urlRender }/users/update/${userId}`, formData);
             console.log(response.data[0])
             if (response) {
                 setCurrentUser(response.data[0])

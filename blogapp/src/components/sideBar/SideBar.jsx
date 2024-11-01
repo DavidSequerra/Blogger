@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 import CurrentUserCtx from '../../context/currentUser';
+import HostRenderCtx from '../../context/hostContext';
 
 import styles from './SideBar.module.css'
 
@@ -10,6 +11,7 @@ import styles from './SideBar.module.css'
 
 function SideBar() {
     const userId = localStorage.getItem("USER_ID");
+    const urlRender = useContext(HostRenderCtx);
     const navigate = useNavigate();
     const { currentUser } = useContext(CurrentUserCtx);
     const [blogsList, setBlogsList] = useState([]);
@@ -17,7 +19,7 @@ function SideBar() {
 
     const fetchBlogs = async () => {
         try {
-            const response = await axios.get(`http://localhost:3001/blogs/list/${userId}`);
+            const response = await axios.get(`${urlRender }/blogs/list/${userId}`);
             setBlogsList(response.data.slice(0, 5));
         } catch (error) {
             console.error(error);
@@ -26,7 +28,7 @@ function SideBar() {
 
     const fetchFollows = async () => {
         try {
-            const response = await axios.get(`http://localhost:3001/follows/list/${userId}`);
+            const response = await axios.get(`${urlRender }/follows/list/${userId}`);
             setFollowsList(response.data.slice(0, 5));
         } catch (error) {
             console.error(error);

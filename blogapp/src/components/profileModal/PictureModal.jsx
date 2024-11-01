@@ -3,11 +3,14 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import CurrentUserCtx from '../../context/currentUser';
+import HostRenderCtx from '../../context/hostContext';
+
 
 import styles from './PictureModal.module.css';
 
 function PictureModal() {
     const userId = localStorage.getItem("USER_ID");
+    const urlRender = useContext(HostRenderCtx); 
     const { currentUser, setCurrentUser } = useContext(CurrentUserCtx);
     const [clicked, setClicked] = useState(false);
     const [formImg, setFormImg] = useState('');
@@ -16,7 +19,7 @@ function PictureModal() {
         const fetchData = async () => {
             if (!currentUser) {
                 try {
-                    const response = await axios.get(`http://localhost:3001/users/${userId}`);
+                    const response = await axios.get(`${urlRender }/users/${userId}`);
                     const data = response.data[0];
                     setFormImg(data.img || '');
                 } catch (error) {
@@ -37,7 +40,7 @@ function PictureModal() {
             formData.img = currentUser.img
         }
         try {
-            const response = await axios.put(`http://localhost:3001/users/update/${userId}`, formData);
+            const response = await axios.put(`${urlRender }/users/update/${userId}`, formData);
             console.log(response.data[0])
             if (response) {
                 setCurrentUser(response.data[0])
@@ -58,7 +61,7 @@ function PictureModal() {
             value: 'https://res.cloudinary.com/dcgo03ddv/image/upload/v1726395756/zda6ccnibf1zszhmbs0c.webp'
         }
         try {
-            const response = await axios.put(`http://localhost:3001/users/updateKeyValue/${userId}`, imgData);
+            const response = await axios.put(`${urlRender }/users/updateKeyValue/${userId}`, imgData);
             setCurrentUser(response.data[0]);
         } catch (error) {
             console.log(error);

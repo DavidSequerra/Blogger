@@ -3,14 +3,18 @@ import axios from 'axios';
 import ProfileModal from '../components/profileModal/ProfileModal';
 import PictureModal from '../components/profileModal/PictureModal';
 import CurrentUserCtx from '../context/currentUser';
+import HostRenderCtx from '../context/hostContext';
+
 import SideBar from '../components/sideBar/SideBar';
 
 import { useNavigate } from 'react-router-dom';
 
 import styles from './ProfilePage.module.css';
 
+
 function ProfilePage() {
     const userId = localStorage.getItem("USER_ID");
+    const urlRender = useContext(HostRenderCtx);
     const { currentUser, setCurrentUser } = useContext(CurrentUserCtx);
     const navigate = useNavigate();
     const [blogsList, setBlogsList] = useState([]);
@@ -18,7 +22,7 @@ function ProfilePage() {
 
     const fetchBlogs = async () => {
         try {
-            const response = await axios.get(`http://localhost:3001/blogs/list/${userId}`);
+            const response = await axios.get(`${urlRender }/blogs/list/${userId}`);
             setBlogsList(response.data);
         } catch (error) {
             console.error(error);
@@ -27,7 +31,7 @@ function ProfilePage() {
 
     const fetchFollows = async () => {
         try {
-            const response = await axios.get(`http://localhost:3001/follows/list/${userId}`);
+            const response = await axios.get(`${urlRender }/follows/list/${userId}`);
             setFollowsList(response.data);
         } catch (error) {
             console.error(error);
@@ -49,7 +53,7 @@ function ProfilePage() {
         const fetchData = async () => {
             if (!currentUser) {
                 try {
-                    const response = await axios.get(`http://localhost:3001/users/${userId}`);
+                    const response = await axios.get(`${urlRender }/users/${userId}`);
                     const data = response.data[0];
                     setCurrentUser(data);
                 } catch (error) {

@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import { useNavigate } from 'react-router-dom';
 import CurrentUserCtx from '../../context/currentUser';
-
+import HostRenderCtx from '../../context/hostContext';
 import styles from './SignUp.module.css'
 
 function SignupA() {
@@ -17,6 +17,7 @@ function SignupA() {
     const [formVerifyPassword, setFormVerifyPassword] = useState('');
     const [formUsername, setFormUsername] = useState('');
     const [formBio, setFormBio] = useState('');
+    const urlRender = useContext(HostRenderCtx); 
 
 
     const handleSignUp = async () => {
@@ -30,7 +31,7 @@ function SignupA() {
             password: formPassword
         };
         try {
-            const response = await axios.post('http://localhost:3001/users/signup', formData);
+            const response = await axios.post(`${ urlRender }/users/signup`, formData);
             const currentUser = response.data[0];
             currentUser.change = 0;
             setCurrentUser(currentUser);

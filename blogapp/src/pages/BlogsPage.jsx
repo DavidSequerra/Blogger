@@ -5,6 +5,7 @@ import CreateBlog from '../components/buttons/CreateBlogBtn';
 import axios from 'axios';
 
 import CurrentUserCtx from '../context/currentUser';
+import HostRenderCtx from '../context/hostContext';
 
 import FollowBtn from '../components/buttons/FollowBtn';
 import styles from './BlogsPage.module.css'
@@ -13,13 +14,14 @@ import styles from './BlogsPage.module.css'
 
 function BlogsPage() {
     const userId = localStorage.getItem("USER_ID");
+    const urlRender = useContext(HostRenderCtx);
     const { currentUser } = useContext(CurrentUserCtx);
     const navigate = useNavigate();
     const [blogs, setBlogs] = useState([]);
 
     const fetchBlogs = async () => {
         try {
-            const response = await axios.get("http://localhost:3001/blogs");
+            const response = await axios.get(`${ urlRender }/blogs`);
             setBlogs(response.data);
         } catch (error) {
             console.error(error);
@@ -27,6 +29,7 @@ function BlogsPage() {
     }
     useEffect(() => {
         fetchBlogs();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentUser]);
 
     const snipNavigate = (path) => {
