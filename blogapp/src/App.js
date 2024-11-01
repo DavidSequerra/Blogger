@@ -1,23 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+import CurrentUserCtx from "./context/currentUser";
+
+import HomePage from "./pages/HomePage";
+import Navbar from "./components/navbar/Navbar";
+import HomePageOut from "./pages/HomePageOut";
+import ProfilePage from "./pages/ProfilePage";
+import BlogsPage from "./pages/BlogsPage";
+import FeedPage from "./pages/FeedPage";
+
+import "./App.css";
 
 function App() {
+  const [currentUser, setCurrentUser] = useState(null);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <CurrentUserCtx.Provider value={{ currentUser, setCurrentUser }}>
+        <BrowserRouter>
+          <Navbar />
+          <div className="redimensionPage">
+            <Routes>
+              <Route path="/" element={<HomePageOut />} />
+              <Route path="/homepage" element={<HomePage />} />
+              <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/blogs" element={<BlogsPage />} />
+              <Route path="/feed" element={<FeedPage />} />
+              <Route path="/feed/:blogId" element={<FeedPage />} />
+            </Routes>
+          </div>
+        </BrowserRouter>
+      </CurrentUserCtx.Provider>
     </div>
   );
 }
