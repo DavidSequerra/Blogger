@@ -8,7 +8,7 @@ router.use(require("cors")());
 router.get("/list/:userId", async (req, res) => {
   const userId = req.params.userId;
   try {
-    const result = await poolDBlocal(
+    const result = await poolDB(
       `SELECT follows.*, blogs.title
       FROM follows
       JOIN blogs ON follows.blog_id = blogs.blog_id
@@ -28,7 +28,7 @@ router.get("/:userId/:blogId", async (req, res) => {
   const userId = req.params.userId;
   const blogId = req.params.blogId;
   try {
-    const result = await poolDBlocal(
+    const result = await poolDB(
       `SELECT * FROM follows
       WHERE user_id = $1
       AND blog_id = $2
@@ -47,21 +47,21 @@ router.post("/:userId/:blogId", async (req, res) => {
   const blogId = req.params.blogId;
   try {
     const checkFollowQuery = `SELECT * FROM follows WHERE user_id = $1 AND blog_id = $2`;
-    const checkFollow = await poolDBlocal(checkFollowQuery, [userId, blogId]);
+    const checkFollow = await poolDB(checkFollowQuery, [userId, blogId]);
 
     if (checkFollow.length > 0) {
-      await poolDBlocal(
+      await poolDB(
         `DELETE FROM follows WHERE user_id = $1 AND blog_id = $2`,
         [userId, blogId]
       );
     } else {
-      await poolDBlocal(
+      await poolDB(
         `INSERT INTO follows (user_id, blog_id) 
             VALUES ($1, $2)`,
         [userId, blogId]
       );
     }
-    const result = await poolDBlocal(checkFollowQuery, [userId, blogId]);
+    const result = await poolDB(checkFollowQuery, [userId, blogId]);
     res.send(result);
   } catch (error) {
     console.error("Error toggling like:", error);

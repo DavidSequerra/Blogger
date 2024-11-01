@@ -7,7 +7,7 @@ router.use(require("cors")());
 
 router.get("/usersBlogs", async (req, res) => {
   try {
-    const result = await poolDBlocal(
+    const result = await poolDB(
       `SELECT p.*, u.username, u.img, b.title
       FROM posts p
       JOIN users u ON p.user_id = u.user_id
@@ -25,7 +25,7 @@ router.get("/usersBlogs", async (req, res) => {
 router.get("/:blogId", async (req, res) => {
   const blog_id = req.params.blogId;
   try {
-    const result = await poolDBlocal(
+    const result = await poolDB(
       `SELECT p.*, u.username, u.img, b.title,
               (SELECT COUNT(*) FROM replies r WHERE r.post_id = p.post_id AND r.parent_reply_id IS NULL) AS reply_count
        FROM posts p
@@ -45,7 +45,7 @@ router.get("/:blogId", async (req, res) => {
 router.post("/newPost", async (req, res) => {
   const { blog_id, user_id, content } = req.body;
   try {
-    const result = await poolDBlocal(
+    const result = await poolDB(
       `INSERT INTO posts
       (blog_id, user_id, content)
       VALUES
@@ -68,7 +68,7 @@ router.delete("/:postId", async (req, res) => {
     return res.status(400).json({ message: "Missing replyId or userId" });
   }
   try {
-    const result = await poolDBlocal(
+    const result = await poolDB(
       `DELETE FROM posts
           WHERE post_id = $1
           AND user_id = $2

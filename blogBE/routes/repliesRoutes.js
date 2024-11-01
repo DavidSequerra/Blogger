@@ -7,7 +7,7 @@ router.use(require("cors")());
 
 router.get("/:postId", async (req, res) => {
   const post_id = req.params.postId;
-  const result = await poolDBlocal(
+  const result = await poolDB(
     `SELECT replies.*, users.username, users.img
             FROM replies
             JOIN users ON replies.user_id = users.user_id
@@ -23,7 +23,7 @@ router.get("/replyId/:replyId", async (req, res) => {
   const reply_id = req.params.replyId;
   if (reply_id) {
     try {
-      const result = await poolDBlocal(
+      const result = await poolDB(
         `SELECT replies.*, users.username, users.img
             FROM replies
             JOIN users ON replies.user_id = users.user_id
@@ -45,7 +45,7 @@ router.post("/newReply", async (req, res) => {
   const { post_id, parent_reply_id, content, user_id } = req.body;
   try {
     if (!parent_reply_id) {
-      const result = await poolDBlocal(
+      const result = await poolDB(
         `INSERT INTO replies (post_id, content, user_id)
         VALUES ($1,$2,$3)
         RETURNING *
@@ -54,7 +54,7 @@ router.post("/newReply", async (req, res) => {
       );
       res.send(result);
     } else {
-      const result = await poolDBlocal(
+      const result = await poolDB(
         `INSERT INTO replies (post_id, parent_reply_id, content, user_id)
         VALUES ($1,$2,$3,$4)
         RETURNING *
@@ -77,7 +77,7 @@ router.delete("/:replyId", async (req, res) => {
     return res.status(400).json({ message: "Missing replyId or userId" });
   }
   try {
-    const result = await poolDBlocal(
+    const result = await poolDB(
       `DELETE FROM replies
           WHERE reply_id = $1
           AND user_id = $2

@@ -31,10 +31,10 @@ router.get("/:itemType/:itemId", async (req, res) => {
 
   try {
     const likesQuery = `SELECT * FROM likes WHERE ${itemColumn} = $1`;
-    const allLikes = await poolDBlocal(likesQuery, [itemId]);
+    const allLikes = await poolDB(likesQuery, [itemId]);
 
     const userLikeQuery = `SELECT * FROM likes WHERE ${itemColumn} = $1 AND user_id = $2`;
-    const userLike = await poolDBlocal(userLikeQuery, [itemId, userId]);
+    const userLike = await poolDB(userLikeQuery, [itemId, userId]);
 
     res.send({ allLikes, userLike });
   } catch (error) {
@@ -71,17 +71,17 @@ router.post("/postLike", async (req, res) => {
 
   try {
     const userLikeQuery = `SELECT * FROM likes WHERE ${itemColumn} = $1 AND user_id = $2`;
-    const userLikeResult = await poolDBlocal(userLikeQuery, [itemId, userId]);
+    const userLikeResult = await poolDB(userLikeQuery, [itemId, userId]);
 
     if (userLikeResult.length > 0) {
       const deleteLikeQuery = `DELETE FROM likes WHERE ${itemColumn} = $1 AND user_id = $2`;
-      await poolDBlocal(deleteLikeQuery, [itemId, userId]);
+      await poolDB(deleteLikeQuery, [itemId, userId]);
     } else {
       const insertLikeQuery = `INSERT INTO likes (user_id, ${itemColumn}) 
             VALUES ($1, $2)`;
-      await poolDBlocal(insertLikeQuery, [userId, itemId]);
+      await poolDB(insertLikeQuery, [userId, itemId]);
     }
-    const result = await poolDBlocal(userLikeQuery, [itemId, userId]);
+    const result = await poolDB(userLikeQuery, [itemId, userId]);
     res.send(result);
   } catch (error) {
     console.error("Error toggling like:", error);

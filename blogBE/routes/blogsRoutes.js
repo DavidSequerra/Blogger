@@ -7,7 +7,7 @@ router.use(require("cors")());
 
 router.get("/", async (req, res) => {
   try {
-    const result = await poolDBlocal("SELECT * FROM blogs");
+    const result = await poolDB("SELECT * FROM blogs");
     res.send(result);
   } catch (error) {
     console.log(error);
@@ -20,7 +20,7 @@ router.post("/infinite", async (req, res) => {
   const limit = 10;
   const offset = (pageNumber - 1) * limit;
   try {
-    const result = await poolDBlocal(
+    const result = await poolDB(
       `SELECT * FROM blogs
       WHERE title ILIKE $1
       LIMIT $2 OFFSET $3
@@ -36,7 +36,7 @@ router.post("/infinite", async (req, res) => {
 router.get("/list/:userId", async (req, res) => {
   const user_id = req.params.userId;
   try {
-    const result = await poolDBlocal(
+    const result = await poolDB(
       `SELECT * FROM blogs
       WHERE user_id = $1
       ORDER BY created_at DESC
@@ -53,7 +53,7 @@ router.get("/list/:userId", async (req, res) => {
 router.get("/:blogId", async (req, res) => {
   const blog_id = req.params.blogId;
   try {
-    const result = await poolDBlocal(
+    const result = await poolDB(
       `SELECT * FROM blogs
       WHERE blog_id = $1
       ORDER BY created_at DESC
@@ -72,7 +72,7 @@ router.post("/:userId", async (req, res) => {
   const user_id = req.params.userId;
   const { title, description } = req.body;
   try {
-    const result = await poolDBlocal(
+    const result = await poolDB(
       `INSERT INTO blogs
             (user_id, title, description)
             VALUES
@@ -95,7 +95,7 @@ router.delete("/:blogId", async (req, res) => {
     return res.status(400).json({ message: "Missing replyId or userId" });
   }
   try {
-    const result = await poolDBlocal(
+    const result = await poolDB(
       `DELETE FROM blogs
           WHERE blog_id = $1
           AND user_id = $2
