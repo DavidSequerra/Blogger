@@ -19,6 +19,7 @@ function LogInA() {
             email: formEmail,
             password: formPassword
         };
+        console.log(formData)
         try {
             const response = await axios.post(`${ urlRender }/users/login`, formData);
             if (response.status === 200) {

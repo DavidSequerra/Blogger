@@ -31,6 +31,7 @@ router.get("/:userId", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
+    console.log(email, password)
     const result = await poolDB(`SELECT * FROM users WHERE email = $1`, [
       email,
     ]);
