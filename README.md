@@ -40,7 +40,7 @@ Blogger is a microblogging platform consisting of a frontend application (BlogAp
 
 ## Folder Structure
 
-blogger
+```blogger
 ├── blogapp # Frontend Application
 │ ├── public
 │ ├── src
@@ -52,7 +52,7 @@ blogger
 │ ├── package.json
 │ ├── server.js
 │ └── README.md
-└── README.md # This file
+└── README.md # This file```
 
 ### Detailed Breakdown
 
