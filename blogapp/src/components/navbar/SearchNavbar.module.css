@@ -3,6 +3,14 @@
     width: 21rem;
 }
 
+@media (max-width: 600px) {
+    .formWrapper {
+            padding-left: 3.125rem;
+            width: 21rem;
+            display: none;
+        }
+}
+
 @keyframes slideRight {
     from {
         transform: translateX(0);

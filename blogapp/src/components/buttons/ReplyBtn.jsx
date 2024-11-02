@@ -48,8 +48,8 @@ function ReplyBtn({ postId, parentReplyId, refreshParent }) {
             <button className={styles.replyButton} onClick={handleClick}>reply</button>
             <Overlay show={showOverlay} rootClose={true} onHide={() => setShowOverlay(false)} target={target} placement='bottom' container={ref} containerPadding={20}>
                 <Popover className={styles.popoverWrapper}>
-                    <Popover.Body>
-                        <Form>
+                    <Popover.Body className={styles.popoverBody}>
+                        <Form className={styles.popoverBody}>
                             <Form.Group>
                                 <Form.Control className={styles.width20r} as='textarea' rows={1} value={replyContent} onChange={(e) => setReplyContent(e.target.value)}></Form.Control>
                             </Form.Group>

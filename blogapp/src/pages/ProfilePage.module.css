@@ -42,3 +42,56 @@ h1 {
 .twoColumns li {
     cursor: pointer;
 }
+@media (max-width:600px) {
+    .navbarMarginned {
+            display: flex;
+            flex-direction: row;
+            margin-left: 0rem;
+            padding-top: 3rem;
+           
+        }
+    
+        .feedWrapper {
+            flex: 1;
+            margin: 0rem;
+            padding-left: 0rem;
+            padding-right: 0rem;
+            width: 100vw;
+            /* height: 100vh; */
+            /* margin-bottom: 0; */
+        }
+    
+        .limitDiv {
+            width: 100vw;
+            margin: auto;
+            margin-bottom: 0rem;
+        }
+    
+    
+        h1 {
+            font-weight: 600;
+            width: 100vw;
+        }
+    
+        .blogsSection {
+            display: flex;
+            flex-direction: column;
+            width: 100vw;
+            font-size: 120%;
+        }
+    
+        .twoColumns {
+            display: flex;
+            flex-direction: column;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem 1rem;
+            width: 100vw;
+            padding: 0;
+            margin: 0;
+            font-size: 80%;
+        }
+    
+        .twoColumns li {
+            cursor: pointer;
+        }
+}
