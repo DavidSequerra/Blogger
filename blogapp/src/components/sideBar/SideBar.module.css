@@ -131,6 +131,11 @@
         padding-left: 0;
         list-style: none;
         text-align: center;
+        
+    }
+
+    .listedSubItems {
+        display: none;
     }
 
     .listedItems:hover {
@@ -139,6 +144,7 @@
     }
 
     .listedItems li {
+        
         position: relative;
         padding-left: 1rem;
         padding-right: 1rem;
@@ -149,6 +155,7 @@
 
     .listeditems ul {
         margin-bottom: 0;
+        display: none;
     }
 
     .listedItems li::before {

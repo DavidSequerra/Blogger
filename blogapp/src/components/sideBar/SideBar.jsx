@@ -60,7 +60,7 @@ function SideBar() {
             {blogsList.length > 0 &&
                 <div className={styles.sectionsWrapper}>
                     <div className={styles.title}>My blogs</div>
-                    <ul className={styles.listedItems}>
+                    <ul className={`${styles.listedItems} ${styles.listedSubItems}`}>
                         {blogsList.map(blog => (
                             <li key={blog.blog_id} onClick={() => snipNavigator(`/feed/${blog.blog_id}`)}><p>{blog.title}</p></li>
                         ))}
@@ -70,7 +70,7 @@ function SideBar() {
             {followsList.length > 0 &&
                 <div className={styles.sectionsWrapper}>
                     <div className={styles.title}>Following blogs</div>
-                    <ul className={styles.listedItems}>
+                    <ul className={`${styles.listedItems} ${styles.listedSubItems}`}>
                         {followsList.map(blog => (
                             <li key={blog.follow_id} onClick={() => snipNavigator(`/feed/${blog.blog_id}`)}><p>{blog.title}</p></li>
                         ))}
