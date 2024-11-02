@@ -6,7 +6,7 @@ BlogApp is a microblogging platform built using React to showcase my web develop
 
 - **User Authentication**: Users can sign up and log in to access the features.
 - **Blog Management**: Create new blogs, manage posts, and personalize your content.
-- **Post Interaction**: 
+- **Post Interaction**:
   - Create posts for a specific blog.
   - Like posts and see a tally of likes.
   - Reply to posts and engage in conversations with nested comments.
@@ -30,83 +30,88 @@ To run the project locally, follow these steps:
    `"cd blogapp"`
 3. **Install dependencies**:
    `"npm install"`
+4. **Create a `.env` file in the root directory and add the following line:**
+   `"REACT_APP_API_URL=http://localhost:3001"`
 4. **Run the development server**:
    `"npm start"`
 5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+
+## Access the Deployed Application
+
+You can access the deployed Blogger application at the following URL: [https://bloggerfe.onrender.com/](https://bloggerfe.onrender.com/)
 
 ## Folder Structure
 
 Here's an overview of the project folder structure:
 
 blogapp
-├─ public
-│ ├─ index.html
-│ └─ robots.txt
-├─ src
-│ ├─ components
-│ │ ├─ buttons
-│ │ │ ├─ CreateBlogBtn.jsx
-│ │ │ ├─ CreateBlogBtn.module.css
-│ │ │ ├─ DeleteBtn.jsx
-│ │ │ ├─ DeleteBtn.module.css
-│ │ │ ├─ FollowBtn.jsx
-│ │ │ ├─ FollowBtn.module.css
-│ │ │ ├─ LikeBtn.jsx
-│ │ │ ├─ LikeBtn.module.css
-│ │ │ ├─ PostBtn.jsx
-│ │ │ ├─ PostBtn.module.css
-│ │ │ ├─ RepliesSection.jsx
-│ │ │ ├─ RepliesSection.module.css
-│ │ │ ├─ ReplyBtn.jsx
-│ │ │ └─ ReplyBtn.module.css
-│ │ ├─ homePageOut
-│ │ │ ├─ LogIn.jsx
-│ │ │ ├─ LogIn.module.css
-│ │ │ ├─ SignUp.jsx
-│ │ │ └─ SignUp.module.css
-│ │ ├─ hooks
-│ │ │ └─ infiniteSearch.js
-│ │ ├─ navbar
-│ │ │ ├─ Navbar.jsx
-│ │ │ ├─ Navbar.module.css
-│ │ │ ├─ SearchNavbar.jsx
-│ │ │ └─ SearchNavbar.module.css
-│ │ ├─ profileModal
-│ │ │ ├─ PictureModal.jsx
-│ │ │ ├─ PictureModal.module.css
-│ │ │ ├─ ProfileModal.jsx
-│ │ │ └─ ProfileModal.module.css
-│ │ ├─ sideBar
-│ │ │ ├─ SideBar.jsx
-│ │ │ └─ SideBar.module.css
-│ │ └─ userCard
-│ │ ├─ UserCard.jsx
-│ │ └─ UserCard.module.css
-│ ├─ context
-│ │ ├─ currentUser.js
-│ │ └─ hostContext.js
-│ ├─ pages
-│ │ ├─ BlogsPage.jsx
-│ │ ├─ BlogsPage.module.css
-│ │ ├─ FeedPage.jsx
-│ │ ├─ FeedPage.module.css
-│ │ ├─ HomePage.jsx
-│ │ ├─ HomePage.module.css
-│ │ ├─ HomePageOut.jsx
-│ │ ├─ HomePageOut.module.css
-│ │ ├─ ProfilePage.jsx
-│ │ └─ ProfilePage.module.css
-│ ├─ App.css
-│ ├─ App.js
-│ ├─ App.test.js
-│ ├─ index.css
-│ ├─ index.js
-│ ├─ reportWebVitals.js
-│ └─ setupTests.js
-├─ README.md
-├─ package-lock.json
-└─ package.json
-
+├── public
+│ ├── index.html
+│ └── robots.txt
+├── src
+│ ├── components
+│ │ ├── buttons
+│ │ │ ├── CreateBlogBtn.jsx
+│ │ │ ├── CreateBlogBtn.module.css
+│ │ │ ├── DeleteBtn.jsx
+│ │ │ ├── DeleteBtn.module.css
+│ │ │ ├── FollowBtn.jsx
+│ │ │ ├── FollowBtn.module.css
+│ │ │ ├── LikeBtn.jsx
+│ │ │ ├── LikeBtn.module.css
+│ │ │ ├── PostBtn.jsx
+│ │ │ ├── PostBtn.module.css
+│ │ │ ├── RepliesSection.jsx
+│ │ │ ├── RepliesSection.module.css
+│ │ │ ├── ReplyBtn.jsx
+│ │ │ └── ReplyBtn.module.css
+│ │ ├── homePageOut
+│ │ │ ├── LogIn.jsx
+│ │ │ ├── LogIn.module.css
+│ │ │ ├── SignUp.jsx
+│ │ │ └── SignUp.module.css
+│ │ ├── hooks
+│ │ │ └── infiniteSearch.js
+│ │ ├── navbar
+│ │ │ ├── Navbar.jsx
+│ │ │ ├── Navbar.module.css
+│ │ │ ├── SearchNavbar.jsx
+│ │ │ └── SearchNavbar.module.css
+│ │ ├── profileModal
+│ │ │ ├── PictureModal.jsx
+│ │ │ ├── PictureModal.module.css
+│ │ │ ├── ProfileModal.jsx
+│ │ │ └── ProfileModal.module.css
+│ │ ├── sideBar
+│ │ │ ├── SideBar.jsx
+│ │ │ └── SideBar.module.css
+│ │ └── userCard
+│ │ ├── UserCard.jsx
+│ │ └── UserCard.module.css
+│ ├── context
+│ │ ├── currentUser.js
+│ │ └── hostContext.js
+│ ├── pages
+│ │ ├── BlogsPage.jsx
+│ │ ├── BlogsPage.module.css
+│ │ ├── FeedPage.jsx
+│ │ ├── FeedPage.module.css
+│ │ ├── HomePage.jsx
+│ │ ├── HomePage.module.css
+│ │ ├── HomePageOut.jsx
+│ │ ├── HomePageOut.module.css
+│ │ ├── ProfilePage.jsx
+│ │ └── ProfilePage.module.css
+│ ├── App.css
+│ ├── App.js
+│ ├── App.test.js
+│ ├── index.css
+│ ├── index.js
+│ ├── reportWebVitals.js
+│ └── setupTests.js
+├── README.md
+├── package-lock.json
+└── package.json
 
 ### Detailed Breakdown
 
@@ -142,4 +147,3 @@ Refer to `package.json` for a complete list.
 Currently, contributions to the code are not accepted. However, you can share feedback, ideas, or suggestions directly via messages. Our team will review your input and make any necessary adjustments to improve the project.
 
 ---
-

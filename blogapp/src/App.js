@@ -11,12 +11,12 @@ import ProfilePage from "./pages/ProfilePage";
 import BlogsPage from "./pages/BlogsPage";
 import FeedPage from "./pages/FeedPage";
 
+
 import "./App.css";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
-  // const urlRender = "https://blogger-la1i.onrender.com";
-  const urlRender = "https://blogger-la1i.onrender.com";
+  const urlRender = process.env.REACT_APP_API_URL || "http://localhost:3001";
   return (
     <div>
       <HostRenderCtx.Provider value={urlRender}>
