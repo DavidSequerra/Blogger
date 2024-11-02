@@ -39,8 +39,8 @@ Blogger is a microblogging platform consisting of a frontend application (BlogAp
   - **CORS Handling**: `cors`
 
 ## Folder Structure
-
-```blogger
+```
+blogger
 ├── blogapp # Frontend Application
 │ ├── public
 │ ├── src
@@ -52,8 +52,8 @@ Blogger is a microblogging platform consisting of a frontend application (BlogAp
 │ ├── package.json
 │ ├── server.js
 │ └── README.md
-└── README.md # This file```
-
+└── README.md # This file
+```
 ### Detailed Breakdown
 
 - **blogapp/**: Contains the frontend codebase, including components, pages, and styles.

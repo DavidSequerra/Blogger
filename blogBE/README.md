@@ -44,7 +44,7 @@ Follow these steps to set up the backend locally:
 ## Folder Structure
 
 Here's an overview of the backend folder structure:
-
+```
 blogBE
 ├── routes
 │ ├── blogsRoutes.js
@@ -58,6 +58,7 @@ blogBE
 ├── postgreslocal.js
 ├── postgresql.js
 └── server.js
+```
 
 ### Detailed Breakdown
 

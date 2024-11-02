@@ -43,7 +43,7 @@ You can access the deployed Blogger application at the following URL: [https://b
 ## Folder Structure
 
 Here's an overview of the project folder structure:
-
+```
 blogapp
 ├── public
 │ ├── index.html
@@ -112,6 +112,7 @@ blogapp
 ├── README.md
 ├── package-lock.json
 └── package.json
+```
 
 ### Detailed Breakdown
 
